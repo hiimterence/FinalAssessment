@@ -4,7 +4,7 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from finalassessment import db, app
-from finalassessment.helpers.helpers import validation_preparation
+from finalassessment.blueprints.helpers.helpers import validation_preparation
 import re
 import datetime
 import jwt
@@ -14,25 +14,19 @@ class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    company_name = db.Column(db.String(64),
-                             unique=True, nullable=False)
     first_name = db.Column(db.String(64), nullable=False)
     last_name = db.Column(db.String(64), nullable=False)
     email = db.Column(db.String(120), index=True, unique=True, nullable=False)
     password_hash = db.Column(db.String(), nullable=False)
-    description = db.Column(db.Text)
-    past_orders = db.relationship("Orders", backref="maids", lazy=False,
-                            cascade="delete, delete-orphan")
 
-    def __init__(self, company_name, first_name, last_name, email, password):
+    def __init__(self, first_name, last_name, email, password):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
         self.set_password(password)
-        self.past_orders = []
 
     def __repr__(self):
-        return f"{self.company_name} with email {self.email} saved to database!"
+        return f"Account created!"
 
     @validates('first_name')
     @validation_preparation
@@ -49,22 +43,6 @@ class User(db.Model, UserMixin):
             self.validation_errors.append('No Last Name provided')
 
         return last_name
-
-    @validates('company_name')
-    @validation_preparation
-    def validate_company_name(self, key, company_name):
-        if not company_name:
-            self.validation_errors.append('No Company Name provided')
-
-        if (not self.company_name == company_name):
-            if User.query.filter_by(company_name=company_name).first():
-                self.validation_errors.append('Company Name is already in use')
-
-        if len(company_name) > 0 and (len(company_name) < 3 or len(company_name) > 50):
-            self.validation_errors.append(
-                'Company Name must be between 3 and 50 characters')
-
-        return company_name
 
     @validates('email')
     @validation_preparation
@@ -94,15 +72,6 @@ class User(db.Model, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
-
-    def get_successful_bookings(self):
-        bids = self.bids
-        successful_bookings = []
-        for bid in bids:
-            if bid.is_confirmed:
-                successful_bookings.append(bid.id)
-        self.successful_bookings = successful_bookings
-        return successful_bookings
 
 
     def encode_auth_token(self, user_id):

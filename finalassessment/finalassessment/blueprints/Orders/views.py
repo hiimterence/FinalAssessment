@@ -1,7 +1,8 @@
 from flask import jsonify, Blueprint, request, make_response
-from finalassessment.Orders.model import Orders, db
+from finalassessment.blueprints.Orders.model import Orders, db
 import simplejson as json
-from finalassessment import generate_client_token, gateway, User
+from finalassessment.blueprints.users.model import User
+from finalassessment import generate_client_token, gateway
 # from finalassessment.helpers.sendgrid import send_bid_email
 
 orders_api_blueprint = Blueprint('orders_api',

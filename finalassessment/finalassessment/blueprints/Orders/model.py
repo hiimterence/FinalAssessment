@@ -13,6 +13,7 @@ class Orders(db.Model):
     amount = db.Column(db.Numeric(), db.ForeignKey('maids.price'), nullable=False)
     currency = db.Column(db.String(3), nullable=False, default='MYR')
 
+
     def __init__(self, user_id, booking_at, amount):
         self.user_id = user_id
         self.booking_at = booking_at

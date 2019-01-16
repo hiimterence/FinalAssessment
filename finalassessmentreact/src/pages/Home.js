@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
 import {Container,Row} from 'reactstrap'
-import SideNavbar from '../components/SideNavbar'
-import Dashboard from '../components/Dashboard';
 import {Redirect} from 'react-router-dom'
 
 export default class Home extends Component {
@@ -24,14 +22,9 @@ export default class Home extends Component {
         
         if (localStorage.getItem('jwt')) {
             return(    
-                // Dashboard SECTION
                 <section className="h-100" id="dashboard"> 
-                    <Container fluid>
-                        <Row>
-                            <SideNavbar logout={this.logout}/>
-                            <Dashboard />
-                        </Row>
-                    </Container>
+                    <h1>Hello</h1>
+                    <button onClick={this.logout}>Log out</button>
                 </section>
             )
         }

@@ -98,13 +98,6 @@ export default class Login extends Component {
                                             <Button className="btn btn-dark" value="Login">
                                                 Login
                                             </Button>
-                                            
-                                            <a 
-                                            href="#" 
-                                            className="btn btn-primary h-50 ml-1" id="google-button"
-                                            >
-                                                <FontAwesomeIcon className="fab fa-google" icon={faVrCardboard}/>
-                                            </a>
                                         </div>
                                     </FormGroup>
                                 </Form>

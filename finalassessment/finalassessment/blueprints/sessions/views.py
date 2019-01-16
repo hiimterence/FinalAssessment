@@ -1,5 +1,5 @@
 from flask import jsonify, Blueprint, request, make_response
-from finalassessment.users.model import User
+from finalassessment.blueprints.users.model import User
 
 sessions_api_blueprint = Blueprint('sessions_api',
                                    __name__,

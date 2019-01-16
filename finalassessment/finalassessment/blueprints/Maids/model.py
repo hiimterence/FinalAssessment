@@ -10,10 +10,9 @@ class Maids(db.Model):
     country = db.Column(db.String(), nullable=False)
     age = db.Column(db.String(), nullable=False)
     image = db.Column(db.Text)
-    price=db.Column(db.Numeric())
+    price=db.Column(db.Numeric(),unique=True)
     description= db.Column(db.String())
-    orders = db.relationship("Orders", backref="maids", lazy=False,
-                            cascade="delete, delete-orphan")
+
     
 
     def __init__(self, name, country, age, price, description=None):

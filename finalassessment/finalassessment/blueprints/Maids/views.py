@@ -1,5 +1,5 @@
 from flask import jsonify, Blueprint, request, make_response
-from finalassessment.Maids.model import Maids
+from finalassessment.blueprints.Maids.model import Maids
 import simplejson as json
 
 maids_api_blueprint = Blueprint('maids_api',

@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import axios from 'axios';
 import {Alert,Container,Col,Row,Form,FormGroup,Input,Button} from 'reactstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faVrCardboard } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faVrCardboard } from '@fortawesome/free-solid-svg-icons'
 
 export default class SignUp extends Component {
     constructor(props) {
@@ -13,7 +13,6 @@ export default class SignUp extends Component {
             password:'',
             firstname:'',
             lastname:'',
-            companyname:'',
             message:'',
             loading:false,
             hasError:false,
@@ -33,25 +32,25 @@ export default class SignUp extends Component {
                 first_name:this.state.firstname,
                 last_name:this.state.lastname,
                 email:this.state.email,
-                company_name:this.state.companyname,
                 password:this.state.password,
             }
           })
         .then( response => {
-            const {data} = response;
-            const {message, auth_token} = data
-            const user = response.data.user
+            console.log(response)
+            // const {data} = response;
+            // const {message, auth_token} = data
+            // const user = response.data.user
 
-            localStorage.setItem('jwt',auth_token)
-            localStorage.setItem('currentUser',JSON.stringify(user))
+            // localStorage.setItem('jwt',auth_token)
+            // localStorage.setItem('currentUser',JSON.stringify(user))
 
-            this.setState({
-                message:message
-            })
+            // this.setState({
+            //     message:message
+            // })
         })
-        .catch(catcherror => {
-            console.log(catcherror.response)
-            this.setState({errors: catcherror.response.data.message, hasError: true})
+        .catch(error => {
+            console.log(error)
+            // this.setState({errors: catcherror.response.data.message, hasError: true})
         });    
     }
 
@@ -79,15 +78,6 @@ export default class SignUp extends Component {
         
         this.setState({
             lastname : value
-        })
-    }
-
-    handleCompanyName = (event) =>{
-        const target = event.target
-        const value = target.value
-        
-        this.setState({
-            companyname : value
         })
     }
 
@@ -144,12 +134,7 @@ export default class SignUp extends Component {
                                             placeholder ="Email"
                                             required
                                         />
-                                        <Input onChange={this.handleCompanyName}
-                                            className = "form-control border-top-0 border-left-0 border-right-0 bg-transparent" 
-                                            name = "companyname" 
-                                            placeholder ="Company Name"
-                                            required
-                                        />
+                                        
                                         <Input onChange = {this.handlePassword}
                                             type='password'
                                             className = "form-control border-top-0 border-left-0 border-right-0 bg-transparent" 
@@ -161,13 +146,6 @@ export default class SignUp extends Component {
                                             <Button className="btn btn-dark" value="Login">
                                                 Sign Up
                                             </Button>
-                                            
-                                            <a 
-                                            href="#" 
-                                            className="btn btn-primary h-50 ml-1" id="google-button"
-                                            >
-                                                <FontAwesomeIcon className="fab fa-google" icon={faVrCardboard}/>
-                                            </a>
                                         </div>
                                     </FormGroup>
                                 </Form>

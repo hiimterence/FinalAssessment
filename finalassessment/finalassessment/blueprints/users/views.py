@@ -1,5 +1,5 @@
 from flask import jsonify, Blueprint, request, make_response
-from finalassessment.users.model import User, db
+from finalassessment.blueprints.users.model import User, db
 # from finalassessment.helpers.sendgrid import send_signup_email
 
 users_api_blueprint = Blueprint('users_api',
@@ -11,20 +11,18 @@ users_api_blueprint = Blueprint('users_api',
 def index():
     users = User.query.all()
 
-    # there is probably a more efficient to do this
-    users = [{"id": int(user.id), "company_name": user.company_name, "description": user.description,
+    users = [{"id": int(user.id),
               "email": user.email, "first_name": user.first_name, "last_name": user.last_name} for user in users]
 
     return jsonify(users)
 
 
-@users_api_blueprint.route('/create', methods=['POST'])
+@users_api_blueprint.route('api/v1/users/create', methods=['POST'])
 def create():
     # get the post data
     post_data = request.get_json()
 
     new_user = User(
-        company_name=post_data.get('company_name'),
         first_name=post_data.get('first_name'),
         last_name=post_data.get('last_name'),
         email=post_data.get('email').lower(),
@@ -43,7 +41,6 @@ def create():
     else:
         db.session.add(new_user)
         db.session.commit()
-        send_signup_email(new_user.email, new_user.id)
         auth_token = new_user.encode_auth_token(new_user.id)
         del new_user.__dict__['_sa_instance_state']
         del new_user.__dict__['password_hash']
