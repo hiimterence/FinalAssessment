@@ -4,6 +4,8 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import {Route, Switch} from 'react-router-dom'
+import HelperFinder from './pages/HelperFinder'
+import SideNavbar from './components/Navbar';
 
 class App extends Component {
 
@@ -15,7 +17,10 @@ class App extends Component {
 
   render(){
     return (
+      
+
       <Fragment>
+
         <div className = "content">
           <Switch>
             <Route path="/login" 
@@ -23,6 +28,17 @@ class App extends Component {
                       {
                         return (
                           <Login 
+                            {...props}
+                          />
+                        )
+                      }
+              }
+            />
+            <Route path="/home" 
+              component = { props => 
+                      {
+                        return (
+                          <Home
                             {...props}
                           />
                         )
@@ -40,18 +56,18 @@ class App extends Component {
                       }
               }
             />    
-                
-            <Route path="/" 
+            <Route path="/maids"
               component = { props => 
                       {
                         return (
-                          <Home 
+                          <HelperFinder 
                           {...props}
                           />
                         )
                       }
               }
             />
+ 
           </Switch>
         </div>
       </Fragment>

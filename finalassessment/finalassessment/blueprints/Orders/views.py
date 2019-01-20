@@ -28,7 +28,7 @@ def new_token():
     return jsonify(client_token)
 
 
-@orders_api_blueprint.route('/new_bid', methods=['POST'])
+@orders_api_blueprint.route('/new_order', methods=['POST'])
 def new_order():
     # get the post data
     post_data = request.get_json()
@@ -44,14 +44,13 @@ def new_order():
     })
 
     if result.is_success:
-        new_bid = Orders(
-            user_id=user_id,
-            billboard_id=post_data.get('billboard_id'),
-            medium_id=post_data.get('medium_id'),
+        new_order = Orders(
+            user_id=post_data.get('user_id'),
+            # medium_id=post_data.get('medium_id'),
             booking_at=post_data.get('booking_at'),
             amount=amount
         )
-        db.session.add(new_bid)
+        db.session.add(new_order)
         db.session.commit()
         # send_bid_email(User.query.get(user_id).email, new_bid.id)
 
@@ -88,29 +87,4 @@ def show():
         return make_response(jsonify(responseObject)), 401
 
     user_id = User.decode_auth_token(auth_token)
-    user = User.query.get(user_id)
 
-    if user:
-        bids = user.bids
-        all_bids = []
-        for bid in bids:
-            del bid.__dict__['_sa_instance_state']
-            bid.__dict__['created_at_readable'] = bid.created_at_readable
-            bid.__dict__['booking_at_readable'] = bid.booking_at_readable
-            all_bids.append(bid.__dict__)
-
-        responseObject = {
-            'status': 'success',
-            'message': 'All bids for user returned',
-            'all_ads': all_bids
-        }
-
-        return make_response(json.dumps(responseObject)), 201
-
-    else:
-        responseObject = {
-            'status': 'failed',
-            'message': 'Authentication failed'
-        }
-
-        return make_response(jsonify(responseObject)), 401

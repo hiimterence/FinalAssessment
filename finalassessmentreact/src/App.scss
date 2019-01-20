@@ -136,6 +136,7 @@ html,body,#root,.content{
       }
       
       .sidebar .nav-link {
+        font-size:30px;
         font-weight: 500;
         color: #333;
       }
@@ -217,4 +218,28 @@ html,body,#root,.content{
   .shadow-me {
     background-color: #fff;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(182, 182, 182, 0.05);
+  }
+
+  #welcome{
+    position:fixed;
+    left:350px;
+  }
+
+  #maidcontainer{
+    position:fixed;
+    left:350px;
+    top:100px;
+    // border: 2px solid black;
+  }
+
+  .maid{
+    display:inline-block;
+    border:20px solid transparent;
+  }
+
+  .maidphoto{
+    display:block;
+    height:300px;
+    width:300px;
+    border:2px solid antiquewhite;
   }

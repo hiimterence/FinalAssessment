@@ -10,6 +10,7 @@ sessions_api_blueprint = Blueprint('sessions_api',
 def sign_in():
     # get the post data
     post_data = request.get_json()
+    print(post_data)
     # check if user already exists
     user = User.query.filter_by(email=post_data.get('email')).first()
 

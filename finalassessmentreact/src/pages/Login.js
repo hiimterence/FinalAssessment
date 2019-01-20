@@ -23,22 +23,31 @@ export default class Login extends Component {
         e.preventDefault()
         const validateEmail = EmailValidator.validate(this.state.emailValue)
         if (validateEmail){
-            axios.post('http://localhost:5000/api/v1/login', {
-                email: this.state.emailValue,
-                password: this.state.passwordValue
+            axios({
+                method: 'post',
+                url: 'http://127.0.0.1:5000/api/v1/login',
+                data: {
+                    email: this.state.emailValue,
+                    password: this.state.passwordValue
+                }
               })
               .then(response => {
+                //   console.log(response)
                 const jwt = response.data.auth_token
                 const user = response.data.user
-                localStorage.setItem('jwt', jwt)
-                localStorage.setItem('currentUser',JSON.stringify(user))
+
+                localStorage.setItem('jwt',jwt)
+                localStorage.setItem('userEmail',user.email)
+                localStorage.setItem('userFirstName',user.first_name)
+                localStorage.setItem('userLastName',user.last_name)
+                
                 this.setState({
                     isLoading: false,
                 })
               })
               .catch(error => {
                console.log(error)
-               this.setState({hasError:true})
+            //    this.setState({hasError:true})
               });
         } else {
             this.setState({

@@ -10,14 +10,12 @@ class Maids(db.Model):
     country = db.Column(db.String(), nullable=False)
     age = db.Column(db.String(), nullable=False)
     image = db.Column(db.Text)
-    price=db.Column(db.Numeric(),unique=True)
-    description= db.Column(db.String())
+    # description= db.Column(db.String())
 
     
 
-    def __init__(self, name, country, age, price, description=None):
+    def __init__(self, name, country, age,image):
         self.name = name
         self.country = country
         self.age = age
-        self.image = price
-        self.description = description
+        self.image = image

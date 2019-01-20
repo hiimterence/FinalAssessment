@@ -10,14 +10,14 @@ class Orders(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     ordered_at = db.Column(db.Numeric(), nullable=False)
-    amount = db.Column(db.Numeric(), db.ForeignKey('maids.price'), nullable=False)
-    currency = db.Column(db.String(3), nullable=False, default='MYR')
+    order_for_maid = db.Column(db.Integer, db.ForeignKey('maids.id'), nullable=False)
 
-
-    def __init__(self, user_id, booking_at, amount):
+    def __init__(self, user_id, ordered_at,maid_id):
         self.user_id = user_id
-        self.booking_at = booking_at
-        self.amount = amount
+        self.ordered_at = ordered_at
+        self.maid_id = maid_id
+     
+
 
     @hybrid_property
     def ordered_at_readable(self):

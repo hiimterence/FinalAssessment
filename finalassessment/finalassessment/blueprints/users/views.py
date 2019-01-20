@@ -12,16 +12,16 @@ def index():
     users = User.query.all()
 
     users = [{"id": int(user.id),
-              "email": user.email, "first_name": user.first_name, "last_name": user.last_name} for user in users]
+              "first_name": user.first_name,  "last_name": user.last_name,"email": user.email} for user in users]
 
     return jsonify(users)
 
 
-@users_api_blueprint.route('api/v1/users/create', methods=['POST'])
+@users_api_blueprint.route('/create', methods=['POST'])
 def create():
     # get the post data
     post_data = request.get_json()
-
+    print(post_data)
     new_user = User(
         first_name=post_data.get('first_name'),
         last_name=post_data.get('last_name'),

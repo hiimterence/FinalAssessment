@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import axios from 'axios';
 import {Alert,Container,Col,Row,Form,FormGroup,Input,Button} from 'reactstrap'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faVrCardboard } from '@fortawesome/free-solid-svg-icons'
 
 export default class SignUp extends Component {
     constructor(props) {
@@ -36,21 +34,24 @@ export default class SignUp extends Component {
             }
           })
         .then( response => {
-            console.log(response)
-            // const {data} = response;
-            // const {message, auth_token} = data
-            // const user = response.data.user
+            // console.log(response)
+            const {data} = response;
+            const {message, auth_token} = data
+            const user = response.data.user
 
-            // localStorage.setItem('jwt',auth_token)
-            // localStorage.setItem('currentUser',JSON.stringify(user))
+            localStorage.setItem('jwt',auth_token)
+            localStorage.setItem('userEmail',JSON.stringify(user.email))
+            localStorage.setItem('userFirstName',JSON.stringify(user.first_name))
+            localStorage.setItem('userLastName',JSON.stringify(user.last_name))
 
-            // this.setState({
-            //     message:message
-            // })
+
+            this.setState({
+                message:message
+            })
         })
         .catch(error => {
             console.log(error)
-            // this.setState({errors: catcherror.response.data.message, hasError: true})
+            this.setState({errors: error.response.data.message, hasError: true})
         });    
     }
 

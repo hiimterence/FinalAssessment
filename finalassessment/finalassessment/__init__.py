@@ -7,6 +7,7 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, current_user
 from flask_assets import Bundle, Environment
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -40,13 +41,14 @@ gateway = braintree.BraintreeGateway(
 def generate_client_token():
     return gateway.client_token.generate()
 
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # import user, image & marketplace models so that you can run migration
 from finalassessment.blueprints.users.model import User
 from finalassessment.blueprints.Maids.model import Maids
 from finalassessment.blueprints.Orders.model import Orders
 
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+
 
 ## API Routes ##
 from finalassessment.blueprints.users.views import users_api_blueprint
@@ -54,7 +56,7 @@ from finalassessment.blueprints.sessions.views import sessions_api_blueprint
 from finalassessment.blueprints.Maids.views import maids_api_blueprint
 from finalassessment.blueprints.Orders.views import orders_api_blueprint
 
-app.register_blueprint(users_api_blueprint, url_prefix='/api/v1/users/create')
+app.register_blueprint(users_api_blueprint, url_prefix='/api/v1/users')
 app.register_blueprint(sessions_api_blueprint, url_prefix='/api/v1/')
-app.register_blueprint(maids_api_blueprint, url_prefix='/api/v1/maids')
+app.register_blueprint(maids_api_blueprint, url_prefix='/api/v1/')
 app.register_blueprint(orders_api_blueprint, url_prefix='/api/v1/orders')
