@@ -6,6 +6,7 @@ import SignUp from './pages/SignUp'
 import {Route, Switch} from 'react-router-dom'
 import HelperFinder from './pages/HelperFinder'
 import SideNavbar from './components/Navbar';
+import Profile from './pages/Profile';
 
 class App extends Component {
 
@@ -28,6 +29,17 @@ class App extends Component {
                       {
                         return (
                           <Login 
+                            {...props}
+                          />
+                        )
+                      }
+              }
+            />
+            <Route path="/profile" 
+              component = { props => 
+                      {
+                        return (
+                          <Profile
                             {...props}
                           />
                         )

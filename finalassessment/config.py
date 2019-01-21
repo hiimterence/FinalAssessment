@@ -30,9 +30,6 @@ class DevelopmentConfig(Config):
     S3_LOCATION = f'http://{S3_BUCKET}.s3.amazonaws.com/'
     S3_KEY = os.environ['S3_ACCESS_KEY']
     S3_SECRET = os.environ['S3_SECRET_ACCESS_KEY']
-    BRAINTREE_MERCHANT_ID = os.environ['BRAINTREE_MERCHANT_ID']
-    BRAINTREE_PUBLIC_KEY = os.environ['BRAINTREE_PUBLIC_KEY']
-    BRAINTREE_PRIVATE_KEY = os.environ['BRAINTREE_PRIVATE_KEY']
 
 
 

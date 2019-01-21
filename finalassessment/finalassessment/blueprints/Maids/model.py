@@ -10,9 +10,8 @@ class Maids(db.Model):
     country = db.Column(db.String(), nullable=False)
     age = db.Column(db.String(), nullable=False)
     image = db.Column(db.Text)
-    # description= db.Column(db.String())
-
-    
+    scheduled_to_meet = db.Column(db.Text)
+    place_to_meet = db.Column(db.Text)
 
     def __init__(self, name, country, age,image):
         self.name = name

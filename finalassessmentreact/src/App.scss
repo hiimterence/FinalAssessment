@@ -21,6 +21,7 @@ html,body,#root,.content{
     height: 100%;
     width: 100%;
     font-family: 'Raleway', sans-serif;
+    overflow:scroll;
   }
   
   body{
@@ -178,11 +179,6 @@ html,body,#root,.content{
       box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(182, 182, 182, 0.05);
     }
   }
-
-#generalconceptdiv{
-  max-height:724px;
-  overflow-y:scroll;
-}  
   
 #billboardcontainer{
   max-height:520px;
@@ -220,7 +216,7 @@ html,body,#root,.content{
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(182, 182, 182, 0.05);
   }
 
-  #welcome{
+  .welcome{
     position:fixed;
     left:350px;
   }
@@ -243,3 +239,14 @@ html,body,#root,.content{
     width:300px;
     border:2px solid antiquewhite;
   }
+
+#credentials{
+  position: fixed;
+  left: 350px;
+  max-width: 1000px;
+
+}
+
+.alert{
+  width: 300px;
+}

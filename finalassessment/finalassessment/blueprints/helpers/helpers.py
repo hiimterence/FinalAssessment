@@ -2,7 +2,7 @@ from finalassessment import S3_KEY, S3_SECRET, S3_BUCKET
 import boto3
 import botocore
 from flask import redirect, url_for
-
+from finalassessment import app
 
 # user details validation helper
 def validation_preparation(func):
@@ -18,9 +18,9 @@ def validation_preparation(func):
 
 # Image upload helpers
 ALLOWED_EXTENSIONS = set(
-    ['png', 'jpg', 'jpeg', 'tiff', 'gif', 'avi', 'mp4', 'mov'])
-image_extensions = set(['png', 'jpg', 'jpeg', 'tiff', 'gif'])
-video_extensions = set(['avi', 'mp4', 'mov'])
+    ['png', 'jpg', 'jpeg', 'tiff'])
+image_extensions = set(['png', 'jpg', 'jpeg', 'tiff'])
+
 
 
 def allowed_file(filename):
@@ -50,7 +50,8 @@ def upload_file(file, bucket_name=S3_BUCKET, acl="public-read"):
     except Exception as e:
         # This is to catch all exception
         print(e)
-        return redirect(url_for('home'))  # change redirect destination later
+    
+    return "{}{}".format(app.config["S3_LOCATION"], file.filename)
 
 
 def delete_file(file_name):

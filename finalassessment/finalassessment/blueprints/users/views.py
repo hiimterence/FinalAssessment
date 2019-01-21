@@ -1,6 +1,10 @@
 from flask import jsonify, Blueprint, request, make_response
 from finalassessment.blueprints.users.model import User, db
-# from finalassessment.helpers.sendgrid import send_signup_email
+import simplejson as json
+import random
+from finalassessment.blueprints.helpers.helpers import upload_file, delete_file,allowed_file
+from werkzeug.utils import secure_filename
+from finalassessment import app
 
 users_api_blueprint = Blueprint('users_api',
                                 __name__,
@@ -21,7 +25,6 @@ def index():
 def create():
     # get the post data
     post_data = request.get_json()
-    print(post_data)
     new_user = User(
         first_name=post_data.get('first_name'),
         last_name=post_data.get('last_name'),
@@ -85,3 +88,4 @@ def show():
         }
 
         return make_response(jsonify(responseObject)), 401
+

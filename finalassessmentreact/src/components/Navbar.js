@@ -27,6 +27,13 @@ export default class SideNavbar extends Component {
                 </span>
               </Link>
             </NavItem>
+            <NavItem>
+              <Link to='/profile' className="nav-link">
+                <span data-feather="home"></span>
+                Profile<span className="sr-only">(current)
+                </span>
+              </Link>
+            </NavItem>
             
             <NavItem>
               <Link to={'/login'} onClick={this.logout} className="nav-link bg-transparent border-0">Log out</Link>

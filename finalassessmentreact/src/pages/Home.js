@@ -17,12 +17,13 @@ export default class Home extends Component {
     render(){
         
         if (localStorage.getItem('jwt')) {
-            return(    
-                <section className="h-100" id="dashboard">
-                    <SideNavbar/>
-                    <HelperFinder/>
-                    <h1 id="welcome">Hello There {localStorage.getItem('userFirstName')}  {localStorage.getItem('userLastName')}! Welcome to MyHelpers</h1>
-                </section>
+            return(  
+                    <section className="h-100" id="dashboard">
+                        <SideNavbar/>
+                        <HelperFinder/>
+                        <h1 className="welcome">Hello There {localStorage.getItem('userFirstName')}  {localStorage.getItem('userLastName')}!  Welcome to MyHelpers. <br/>Here are some available helpers</h1>
+                        
+                    </section>
             )
         }
         else{

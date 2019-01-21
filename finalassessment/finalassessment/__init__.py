@@ -25,28 +25,11 @@ S3_LOCATION = f'http://{S3_BUCKET}.s3.amazonaws.com/'
 S3_KEY = config.S3_KEY
 S3_SECRET = config.S3_SECRET
 
-BRAINTREE_MERCHANT_ID = config.BRAINTREE_MERCHANT_ID
-BRAINTREE_PUBLIC_KEY = config.BRAINTREE_PUBLIC_KEY
-BRAINTREE_PRIVATE_KEY = config.BRAINTREE_PRIVATE_KEY
-
-gateway = braintree.BraintreeGateway(
-    braintree.Configuration(
-        braintree.Environment.Sandbox,
-        merchant_id=BRAINTREE_MERCHANT_ID,
-        public_key=BRAINTREE_PUBLIC_KEY,
-        private_key=BRAINTREE_PRIVATE_KEY
-    )
-)
-
-def generate_client_token():
-    return gateway.client_token.generate()
-
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-# import user, image & marketplace models so that you can run migration
+# import user, image models so that you can run migration
 from finalassessment.blueprints.users.model import User
 from finalassessment.blueprints.Maids.model import Maids
-from finalassessment.blueprints.Orders.model import Orders
 
 
 
@@ -54,9 +37,7 @@ from finalassessment.blueprints.Orders.model import Orders
 from finalassessment.blueprints.users.views import users_api_blueprint
 from finalassessment.blueprints.sessions.views import sessions_api_blueprint
 from finalassessment.blueprints.Maids.views import maids_api_blueprint
-from finalassessment.blueprints.Orders.views import orders_api_blueprint
 
 app.register_blueprint(users_api_blueprint, url_prefix='/api/v1/users')
 app.register_blueprint(sessions_api_blueprint, url_prefix='/api/v1/')
 app.register_blueprint(maids_api_blueprint, url_prefix='/api/v1/')
-app.register_blueprint(orders_api_blueprint, url_prefix='/api/v1/orders')

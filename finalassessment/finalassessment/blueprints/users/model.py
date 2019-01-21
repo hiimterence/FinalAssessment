@@ -18,6 +18,8 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(64), nullable=False)
     email = db.Column(db.String(120), index=True, unique=True, nullable=False)
     password_hash = db.Column(db.String(), nullable=False)
+    profile_picture = db.Column(db.String())
+
 
     def __init__(self, first_name, last_name, email, password):
         self.first_name = first_name

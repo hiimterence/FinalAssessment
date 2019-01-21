@@ -43,7 +43,7 @@ export default class SignUp extends Component {
             localStorage.setItem('userEmail',JSON.stringify(user.email))
             localStorage.setItem('userFirstName',JSON.stringify(user.first_name))
             localStorage.setItem('userLastName',JSON.stringify(user.last_name))
-
+            localStorage.setItem('profilePhoto',JSON.stringify(user.profile_photo))
 
             this.setState({
                 message:message
@@ -122,12 +122,15 @@ export default class SignUp extends Component {
                                             placeholder ="First Name"
                                             required
                                         />
+                                        <Alert color='primary' className='alert'>Once registered, is unchangeable</Alert>
                                         <Input onChange={this.handleLastName}
                                             className = "form-control border-top-0 border-left-0 border-right-0 bg-transparent" 
                                             name = "lastname" 
                                             placeholder ="Last Name"
                                             required
                                         />
+                                        <Alert color='primary' className='alert'>Once registered, is unchangeable</Alert>
+
                                         <Input onChange={this.handleEmail}
                                             className = "form-control border-top-0 border-left-0 border-right-0 bg-transparent" 
                                             name = "email" 
@@ -135,6 +138,7 @@ export default class SignUp extends Component {
                                             placeholder ="Email"
                                             required
                                         />
+                                        <Alert color='primary' className='alert'>Once registered, is unchangeable</Alert>
                                         
                                         <Input onChange = {this.handlePassword}
                                             type='password'
@@ -143,6 +147,8 @@ export default class SignUp extends Component {
                                             placeholder ="Password"
                                             required
                                         />
+                                        <Alert color='primary' className='alert'>Once registered, is unchangeable</Alert>
+
                                         <div className="d-flex flex-row mt-3 ml-1">
                                             <Button className="btn btn-dark" value="Login">
                                                 Sign Up
