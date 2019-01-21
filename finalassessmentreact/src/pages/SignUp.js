@@ -122,14 +122,14 @@ export default class SignUp extends Component {
                                             placeholder ="First Name"
                                             required
                                         />
-                                        <Alert color='primary' className='alert'>Once registered, is unchangeable</Alert>
+                                        <Alert color='primary'>Once registered, is unchangeable</Alert>
                                         <Input onChange={this.handleLastName}
                                             className = "form-control border-top-0 border-left-0 border-right-0 bg-transparent" 
                                             name = "lastname" 
                                             placeholder ="Last Name"
                                             required
                                         />
-                                        <Alert color='primary' className='alert'>Once registered, is unchangeable</Alert>
+                                        <Alert color='primary' >Once registered, is unchangeable</Alert>
 
                                         <Input onChange={this.handleEmail}
                                             className = "form-control border-top-0 border-left-0 border-right-0 bg-transparent" 

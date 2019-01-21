@@ -40,8 +40,6 @@ export default class Login extends Component {
                 localStorage.setItem('userEmail',user.email)
                 localStorage.setItem('userFirstName',user.first_name)
                 localStorage.setItem('userLastName',user.last_name)
-                localStorage.setItem('profilePhoto',JSON.stringify(user.profile_photo))
-
                 
                 this.setState({
                     isLoading: false,
